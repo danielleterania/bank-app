@@ -13,6 +13,7 @@ function SubNav() {
         <a class="nav-link" href="#SendMoney">Send Money</a>
         <a class="nav-link" href="#GetBalance">Get Balance</a>
         <a class="nav-link" href="#UserList">User List</a>
+        <a class="nav-link" href="#BudgetApp">Budget App</a>
       </div>
     </nav>
   );
