@@ -1,0 +1,14 @@
+.MainNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #03045e;
+  padding: 12px 24px;
+}
+
+.nav-logo {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+}

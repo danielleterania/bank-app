@@ -1,10 +1,15 @@
-import logo from "./logo.svg";
 import "./App.css";
+import MainNav from "./components/MainNav/MainNav";
+import SubNav from "./components/SubNav/SubNav";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">This is my title </header>
+        <MainNav />
+        <SubNav />
+        <main class="MainWrapper">
+          
+        </main>
     </div>
   );
 }
