@@ -8,7 +8,9 @@ function MainNav() {
   return (
     <nav className="MainNav">
       <p class="nav-logo">DCB</p>
-      <a class="primary-button" href="#CreateNewUser">Create New User</a>
+      <a class="primary-button" href="#CreateNewUser" onClick={clickMe}>
+        Create New User
+      </a>
     </nav>
   );
 }

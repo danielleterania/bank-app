@@ -1,0 +1,21 @@
+[
+    {
+      "user_name": "Seo Joon Park",
+      "email": "SJPark@gmail.com",
+      "balance": 50000,
+      "id": 0
+    },
+    {
+      "user_name": "Dong Wook Lee",
+      "email": "DWLee@gmail.com",
+      "balance": 100000,
+      "id": 1
+    },
+    {
+      "user_name": "Min Ho Lee",
+      "email": "MHLee@gmail.com",
+      "balance": 25000000,
+      "id": 2
+    }
+  ]
+  

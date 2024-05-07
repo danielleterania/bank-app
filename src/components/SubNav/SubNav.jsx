@@ -6,16 +6,28 @@ function SubNav() {
   };
 
   return (
-    <nav className="SubNav">
-      <div class="nav-links">
-        <a class="nav-link" href="#Deposit">Deposit</a>
-        <a class="nav-link" href="#Withdraw">Withdraw</a>
-        <a class="nav-link" href="#SendMoney">Send Money</a>
-        <a class="nav-link" href="#GetBalance">Get Balance</a>
-        <a class="nav-link" href="#UserList">User List</a>
-        <a class="nav-link" href="#BudgetApp">Budget App</a>
-      </div>
-    </nav>
+    <div className="SubNav">
+      <nav>
+        <nav-link className="item" to="/">
+          UserList
+        </nav-link>
+        <nav-link className="item" to="deposit">
+          Deposit
+        </nav-link>
+        <nav-link className="item" to="/">
+          SendMoney
+        </nav-link>
+        <nav-link className="item" to="/">
+          Withdraw
+        </nav-link>
+        <nav-link className="item" to="/">
+          BudgetApp
+        </nav-link>
+        <nav-link className="item" to="/">
+          GetBalance
+        </nav-link>
+      </nav>
+    </div>
   );
 }
 
