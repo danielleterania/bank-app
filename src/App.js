@@ -31,26 +31,26 @@ function App() {
   return (
     <div className="App">
       <MainNav />
-      <SubNav />
       <BrowserRouter>
+        <SubNav />
         <Routes>
-          {/* <Route path="/" element={<UserList></UserList>}> */}
-          <Route index element={<UserList></UserList>}></Route>
-          <Route path="/deposit" element={<Deposit></Deposit>}></Route>
-          <Route path="/send-money" element={<SendMoney></SendMoney>}></Route>
-          <Route path="/withdraw" element={<Withdraw></Withdraw>}></Route>
-          <Route path="/budget-app" element={<BudgetApp></BudgetApp>}></Route>
-          <Route
-            path="/get-balance"
-            element={<GetBalance></GetBalance>}
-          ></Route>
-          {/* </Route> */}
+          <Route index element={<UserList users={users} />} />
+          <Route path="/deposit" element={<Deposit />} />
+          <Route path="/send-money" element={<SendMoney />} />
+          <Route path="/withdraw" element={<Withdraw />} />
+          <Route path="/budget-app" element={<BudgetApp />} />
+          <Route path="/get-balance" element={<GetBalance />} />
         </Routes>
       </BrowserRouter>
+
       <main className="MainWrapper">{/* Content of main wrapper */}</main>
 
       {
         <div className="ListOfUsers">
+          <AddUser
+            handleAddUser={handleNewUsers}
+            newId={users.length}
+          ></AddUser>
           {users.map((user) => {
             return (
               <div key={user.id}>
@@ -68,7 +68,6 @@ function App() {
           })}
         </div>
       }
-      <AddUser handleAddUser={handleNewUsers} newId={users.length}></AddUser>
     </div>
   );
 }

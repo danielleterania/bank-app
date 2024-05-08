@@ -1,3 +1,4 @@
+import { NavLink, Outlet } from "react-router-dom";
 import "./SubNav.css";
 
 function SubNav() {
@@ -7,26 +8,28 @@ function SubNav() {
 
   return (
     <div className="SubNav">
-      <nav>
-        <nav-link className="item" to="/">
+      <nav class="nav-links">
+        <NavLink className="nav-link" to="/">
           UserList
-        </nav-link>
-        <nav-link className="item" to="deposit">
+        </NavLink>
+        <NavLink className="nav-link" to="deposit">
           Deposit
-        </nav-link>
-        <nav-link className="item" to="/">
+        </NavLink>
+        <NavLink className="nav-link" to="send-money">
           SendMoney
-        </nav-link>
-        <nav-link className="item" to="/">
+        </NavLink>
+        <NavLink className="nav-link" to="withdraw">
           Withdraw
-        </nav-link>
-        <nav-link className="item" to="/">
+        </NavLink>
+        <NavLink className="nav-link" to="budget-app">
           BudgetApp
-        </nav-link>
-        <nav-link className="item" to="/">
+        </NavLink>
+        <NavLink className="nav-link" to="get-balance">
           GetBalance
-        </nav-link>
+        </NavLink>
       </nav>
+
+      <Outlet></Outlet>
     </div>
   );
 }
