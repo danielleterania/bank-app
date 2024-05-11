@@ -15,13 +15,19 @@ function App() {
   const [clients, setClients] = useState(data);
 
   const handleNewClient = (newClient) => {
-    setClients((previousClients) => [...previousClients, newClient]);
+    // copy the clients array, then add the newClient from the onAdd ClientPage component
+    const newClients = [...clients, newClient];
+
+    // update the clients state
+    setClients(newClients);
   };
 
   const handleDeleteClient = (clientId) => {
-    setClients((previousClients) =>
-      previousClients.filter((user) => user.id !== clientId)
-    );
+    // copy the clients array, used filter to get the clients that does not match the clientId from the onDelete ClientPage component
+    const newClients = clients.filter((client) => client.id !== clientId);
+
+    // update the client state
+    setClients(newClients);
   };
 
   return (
@@ -29,7 +35,16 @@ function App() {
       <BrowserRouter>
         <Sidebar />
         <Routes>
-          <Route index element={<ClientPage clients={clients} />} />
+          <Route
+            index
+            element={
+              <ClientPage
+                clients={clients}
+                onDelete={handleDeleteClient}
+                onAdd={handleNewClient}
+              />
+            }
+          />
           <Route path="/deposit" element={<DepositPage clients={clients} />} />
           <Route
             path="/withdraw"

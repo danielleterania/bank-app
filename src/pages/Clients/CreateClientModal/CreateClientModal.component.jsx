@@ -1,7 +1,7 @@
 import { Button, Flex, Form, Input, Modal } from "antd";
 import React from "react";
 
-function CreateClientModal({ isModalOpen, toggleModal }) {
+function CreateClientModal({ isModalOpen, toggleModal, handleAddClient }) {
   // const { isModalOpen, toggleModal } = props;
 
   console.log("IS MODAL OPEN: ", isModalOpen);
@@ -18,13 +18,13 @@ function CreateClientModal({ isModalOpen, toggleModal }) {
       {/* parent */}
       <Form
         style={{ padding: "12px 0" }}
-        onFinish={(values) => console.log(values)}
+        onFinish={(values) => handleAddClient(values)}
       >
         <Flex vertical>
           {/*  */}
           <Form.Item
             label="Username"
-            name="username"
+            name="user_name"
             rules={[
               {
                 required: true,
@@ -42,6 +42,7 @@ function CreateClientModal({ isModalOpen, toggleModal }) {
             rules={[
               {
                 required: true,
+                type: "email",
                 message: "Please input your email!",
               },
             ]}
