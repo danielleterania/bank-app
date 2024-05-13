@@ -30,6 +30,22 @@ function App() {
     setClients(newClients);
   };
 
+  const handleDeposit = (user) => {
+    // copy the clients array,
+    const updatedClients = [...clients];
+
+    // find the index user from the cloned clients array.
+    const userIndex = updatedClients.findIndex(
+      (client) => client.user_name === user.username
+    );
+
+    // using the index update the balance of the user (balance + user.amount from the form)
+    updatedClients[userIndex].balance += user.amount;
+
+    // update the client state.
+    setClients(updatedClients);
+  };
+
   return (
     <Layout style={{ height: "100vh" }}>
       <BrowserRouter>
@@ -45,7 +61,12 @@ function App() {
               />
             }
           />
-          <Route path="/deposit" element={<DepositPage clients={clients} />} />
+          <Route
+            path="/deposit"
+            element={
+              <DepositPage clients={clients} onDeposit={handleDeposit} />
+            }
+          />
           <Route
             path="/withdraw"
             element={<WithdrawPage clients={clients} />}

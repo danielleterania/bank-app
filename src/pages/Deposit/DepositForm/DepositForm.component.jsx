@@ -1,4 +1,4 @@
-import { Button, Flex, Form, Input } from "antd";
+import { Button, Flex, Form, Input, InputNumber } from "antd";
 import React from "react";
 
 function DepositForm(props) {
@@ -47,7 +47,7 @@ function DepositForm(props) {
             },
           ]}
         >
-          <Input />
+          <InputNumber />
         </Form.Item>
       </Flex>
 
