@@ -10,12 +10,12 @@ function SendMoneyForm(props) {
     <Form name="basic" layout="vertical" onFinish={handleOnSubmit}>
       <Flex vertical>
         <Form.Item
-          label="Username"
-          name="username"
+          label="Sender (Username)"
+          name="sender"
           rules={[
             {
               required: true,
-              message: "Please input username!",
+              message: "Please input sender's username!",
             },
           ]}
           style={{ marginBottom: 8 }}
@@ -24,12 +24,12 @@ function SendMoneyForm(props) {
         </Form.Item>
 
         <Form.Item
-          label="Email"
-          name="email"
+          label="Receiver (Username)"
+          name="receiver"
           rules={[
             {
               required: true,
-              message: "Please input email!",
+              message: "Please input receiver's username!",
             },
           ]}
           style={{ marginBottom: 8 }}
@@ -38,12 +38,12 @@ function SendMoneyForm(props) {
         </Form.Item>
 
         <Form.Item
-          label="Amount"
-          name="amount"
+          label="Transfer Amount"
+          name="transferAmount"
           rules={[
             {
               required: true,
-              message: "Please input your amount to trasfer!",
+              message: "Please input the transfer amount!",
             },
           ]}
         >
@@ -52,7 +52,7 @@ function SendMoneyForm(props) {
       </Flex>
 
       <Button type="primary" htmlType="submit">
-        Submit
+        Send Money
       </Button>
     </Form>
   );

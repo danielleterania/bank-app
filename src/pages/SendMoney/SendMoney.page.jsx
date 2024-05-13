@@ -9,39 +9,41 @@ function SendMoneyPage(props) {
 
   const [api, contextHolder] = notification.useNotification();
 
-  const getAccount = (value) => {
-    const { username, email, amount } = value;
+  const getAccount = (values) => {
+    const { sender, receiver, transferAmount } = values;
 
-    const account = clients.find(
-      (client) => client.user_name === username && client.email === email
-    );
+    const senderAccount = clients.find((client) => client.user_name === sender);
+    const receiverAccount = clients.find((client) => client.user_name === receiver);
 
-    if (!account) {
-      openNotificationWithIcon("error");
+    if (!senderAccount || !receiverAccount) {
+      openNotificationWithIcon("error", "One or both users do not exist!");
       return;
     }
-    if (amount > account.balance) {
-      openNotificationWithIcon("error");
+    
+    if (transferAmount <= 0) {
+      openNotificationWithIcon("error", "Invalid transfer amount!");
       return;
     }
 
-    openNotificationWithIcon("success");
+    if (senderAccount.balance < transferAmount) {
+      openNotificationWithIcon("error", "Sender does not have enough balance!");
+      return;
+    }
+
+    // Perform the money transfer operation here
+    
+    openNotificationWithIcon("success", "Money transferred successfully!");
   };
 
-  const openNotificationWithIcon = (type) => {
-    const message = {
-      error: {
-        title: "Error!",
-        description: "Error Message",
-      },
-      success: {
-        title: "Success!",
-        description: "Success Message",
-      },
+  const openNotificationWithIcon = (type, message) => {
+    const notificationType = {
+      error: api.error,
+      success: api.success,
     };
-    api[type]({
-      message: message[type].title,
-      description: message[type].description,
+
+    notificationType[type]({
+      message: type.charAt(0).toUpperCase() + type.slice(1),
+      description: message,
     });
   };
 
@@ -50,7 +52,7 @@ function SendMoneyPage(props) {
       {contextHolder}
       <PageHeader
         title="Send Money"
-        subtitle="Send money to another account."
+        subtitle="Send money to another account using user names."
       />
       <SendMoneyForm onSubmit={getAccount} />
     </PageWrapper>
