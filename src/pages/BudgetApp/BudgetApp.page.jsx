@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Dropdown, Menu, Modal, Table, Form, Input } from "antd";
 
-function BudgetAppPage({ clients }) {
+function BudgetAppPage({ clients, onAddExpense }) {
   const [selectedClient, setSelectedClient] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [expenses, setExpenses] = useState([]);
@@ -20,6 +20,7 @@ function BudgetAppPage({ clients }) {
       amount: expenseAmount,
     };
     setExpenses([...expenses, newExpense]);
+    onAddExpense(newExpense);
     setExpenseName("");
     setExpenseAmount("");
     setIsModalOpen(false);

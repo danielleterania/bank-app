@@ -96,6 +96,13 @@ function App() {
     setClients(updatedClients);
   };
 
+  const handleAddExpense = (expense) => {
+    const updatedClients = [...clients];
+    const userIndex = updatedClients.findIndex((client) => client.user_name === expense.client);
+    updatedClients[userIndex].balance -= parseFloat(expense.amount);
+    setClients(updatedClients);
+  };
+
   return (
     <Layout style={{ height: "100vh" }}>
       {contextHolder}
@@ -124,10 +131,14 @@ function App() {
           <Route
             path="/withdraw"
             element={
+<<<<<<< Updated upstream
               <WithdrawPage
                 clients={clients}
                 onWithdraw={(user) => handleWithdraw(user)}
               />
+=======
+              <WithdrawPage clients={clients} onWithdraw={handleWithdraw} />
+>>>>>>> Stashed changes
             }
           />
           <Route
@@ -142,7 +153,7 @@ function App() {
           />
           <Route
             path="/budget-app"
-            element={<BudgetAppPage clients={clients} />}
+            element={<BudgetAppPage clients={clients} onAddExpense={handleAddExpense} />}
           />
         </Routes>
       </BrowserRouter>
