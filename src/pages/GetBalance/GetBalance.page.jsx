@@ -22,18 +22,18 @@ function GetBalancePage(props) {
     // deconstruct the values of the GetBalanceForm
     const { username } = values;
 
-    const account = clients.find((client) => {
+    const currentAccount = clients.find((client) => {
       return client.user_name === username;
     });
 
     // if no account matches, display error notification then return.
-    if (!account) {
+    if (!currentAccount) {
       openNotificationWithIcon("error");
       return;
     }
 
     // if an account is found, update the account state.
-    setAccount(account);
+    setAccount(currentAccount);
     // hide the modal.
     toggleModal();
   };

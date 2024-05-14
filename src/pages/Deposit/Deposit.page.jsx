@@ -15,7 +15,7 @@ function DepositPage(props) {
     // deconstruct the values from the DepositForm
     const { username, email } = values;
 
-    // .find checks if the inputted username and email is in the clients list
+    // .find checks if the inputted username and email is in the clients list. Returns an obj, in this case whole record/data
     const account = clients.find((client) => {
       return client.user_name === username && client.email === email;
     });
@@ -54,7 +54,7 @@ function DepositPage(props) {
     <PageWrapper>
       {contextHolder}
       <PageHeader title="Deposit" />
-      <DepositForm onSubmit={getAccount} />
+      <DepositForm onSubmit={(values) => getAccount(values)} />
     </PageWrapper>
   );
 }

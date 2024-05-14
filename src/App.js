@@ -35,6 +35,7 @@ function App() {
     if (isUserExisting === true) {
       openNotificationWithIcon("error");
       return;
+      //stops the code
     }
 
     // use .some to check if client.email is already added. (returns a boolean: true / false)
@@ -67,10 +68,10 @@ function App() {
     // copy the clients array,
     const updatedClients = [...clients];
 
-    // find the index user from the cloned clients array.
-    const userIndex = updatedClients.findIndex(
-      (client) => client.user_name === user.username
-    );
+    // find the index user from the cloned clients array. Use this to directly access balance of the obj of array
+    const userIndex = updatedClients.findIndex((client) => {
+      return client.user_name === user.username;
+    });
 
     // using the index update the balance of the user (balance + user.amount from the form)
     updatedClients[userIndex].balance += user.amount;
@@ -114,18 +115,26 @@ function App() {
           <Route
             path="/deposit"
             element={
-              <DepositPage clients={clients} onDeposit={handleDeposit} />
+              <DepositPage
+                clients={clients}
+                onDeposit={(user) => handleDeposit(user)}
+              />
             }
           />
           <Route
             path="/withdraw"
             element={
-              <WithdrawPage clients={clients} onWithdraw={handeWithdraw} />
+              <WithdrawPage
+                clients={clients}
+                onWithdraw={(user) => handleWithdraw(user)}
+              />
             }
           />
           <Route
             path="/send-money"
-            element={<SendMoneyPage clients={clients} setClients={setClients} />}
+            element={
+              <SendMoneyPage clients={clients} setClients={setClients} />
+            }
           />
           <Route
             path="/get-balance"

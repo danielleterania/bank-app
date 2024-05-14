@@ -47,6 +47,7 @@ function ClientPage(props) {
       title: "Delete",
       dataIndex: "delete",
       key: "delete",
+      // record is a variable to access the properties of your dataSource (clients)
       render: (_, record) => (
         <Button onClick={() => handleDelete(record.id)}>Delete</Button>
       ),
@@ -64,7 +65,7 @@ function ClientPage(props) {
       <CreateClientModal
         isModalOpen={isModalOpen}
         toggleModal={toggleModal}
-        handleAddClient={handleAddClient}
+        handleAddClient={(values) => handleAddClient(values)}
       />
     </PageWrapper>
   );

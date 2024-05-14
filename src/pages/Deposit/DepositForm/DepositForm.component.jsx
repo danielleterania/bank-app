@@ -4,10 +4,12 @@ import React from "react";
 function DepositForm(props) {
   const { onSubmit } = props;
 
-  const handleOnSubmit = (values) => onSubmit(values);
-
   return (
-    <Form name="basic" layout="vertical" onFinish={handleOnSubmit}>
+    <Form
+      name="basic"
+      layout="vertical"
+      onFinish={(values) => onSubmit(values)}
+    >
       <Flex vertical>
         <Form.Item
           label="Username"
