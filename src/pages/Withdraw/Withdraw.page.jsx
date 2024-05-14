@@ -5,27 +5,30 @@ import WithdrawForm from "./WithdrawForm/WithdrawForm.component";
 import { notification } from "antd";
 
 function WithdrawPage(props) {
-  const { clients } = props;
+  const { clients, onWithdraw } = props;
 
+  // notification api from antd: https://ant.design/components/notification
+  // contextHolder is used in the return statement.
   const [api, contextHolder] = notification.useNotification();
 
-  const getAccount = (value) => {
-    const { username, email, amount } = value;
+  const getAccount = (values) => {
+    // deconstruct the values from the DepositForm
+    const { username, email } = values;
 
-    const account = clients.find(
-      (client) => client.user_name === username && client.email === email
-    );
+    // .find checks if the inputted username and email is in the clients list
+    const account = clients.find((client) => {
+      return client.user_name === username && client.email === email;
+    });
 
+    // if no account matches, display error notification then return.
     if (!account) {
       openNotificationWithIcon("error");
       return;
     }
 
-    if (amount > account.balance) {
-      openNotificationWithIcon("error");
-      return;
-    }
+    onWithdraw(values);
 
+    // if an account is found, display success notification.
     openNotificationWithIcon("success");
   };
 
@@ -33,13 +36,14 @@ function WithdrawPage(props) {
     const message = {
       error: {
         title: "Error!",
-        description: "Error Message",
+        description: "User does not exist",
       },
       success: {
         title: "Success!",
-        description: "Success Message",
+        description: "Withdrawal complete!",
       },
     };
+
     api[type]({
       message: message[type].title,
       description: message[type].description,

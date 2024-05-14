@@ -12,12 +12,13 @@ function DepositPage(props) {
   const [api, contextHolder] = notification.useNotification();
 
   const getAccount = (values) => {
+    // deconstruct the values from the DepositForm
     const { username, email } = values;
 
     // .find checks if the inputted username and email is in the clients list
-    const account = clients.find(
-      (client) => client.user_name === username && client.email === email
-    );
+    const account = clients.find((client) => {
+      return client.user_name === username && client.email === email;
+    });
 
     // if no account matches, display error notification then return.
     if (!account) {
@@ -48,14 +49,6 @@ function DepositPage(props) {
       description: message[type].description,
     });
   };
-
-  // const openNotificationWithIcon = (type) => {
-  //   api[type]({
-  //     message: 'Notification Title',
-  //     description:
-  //       'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-  //   });
-  // };
 
   return (
     <PageWrapper>

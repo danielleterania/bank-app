@@ -1,6 +1,5 @@
 import {
   FileDoneOutlined,
-  LogoutOutlined,
   SendOutlined,
   UsergroupAddOutlined,
   VerticalAlignBottomOutlined,
@@ -45,29 +44,15 @@ const USER_MENU_ITEMS = [
   },
 ];
 
-const LOGOUT = [
-  {
-    key: "logout",
-    icon: <LogoutOutlined style={{ paddingRight: 10 }} />,
-    label: "Logout",
-  },
-];
-
 function Sidebar() {
-  const handleLogout = () => console.log("LOG OUT!");
   return (
     <Sider>
-      {/* Parent div container, space-between to keep the 2 child divs seperated. */}
-      <Flex vertical justify="space-between" style={{ height: "100%" }}>
-        {/* 1st child div */}
-        <Flex vertical gap={16} style={{ padding: 12 }}>
-          <Title style={{ color: "#fff", padding: 18 }}>DCB</Title>
-          <Menu theme="dark" items={USER_MENU_ITEMS} />
-        </Flex>
-        {/* 2nd child div */}
-        <Flex vertical style={{ padding: 12 }}>
-          <Menu theme="dark" items={LOGOUT} onClick={handleLogout} />
-        </Flex>
+      <Flex vertical gap={16} style={{ padding: 12 }}>
+        {/* Typography: https://ant.design/components/typography */}
+        <Title style={{ color: "#fff", padding: 18 }}>DCB</Title>
+
+        {/* Menu: https://ant.design/components/menu */}
+        <Menu theme="dark" items={USER_MENU_ITEMS} />
       </Flex>
     </Sider>
   );

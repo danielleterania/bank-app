@@ -1,10 +1,8 @@
-import { Button, Flex, Form, Input, Modal } from "antd";
+import { Button, Flex, Form, Input, InputNumber, Modal } from "antd";
 import React from "react";
 
-function CreateClientModal({ isModalOpen, toggleModal, handleAddClient }) {
-  // const { isModalOpen, toggleModal } = props;
-
-  console.log("IS MODAL OPEN: ", isModalOpen);
+function CreateClientModal(props) {
+  const { isModalOpen, toggleModal, handleAddClient } = props;
 
   return (
     <Modal
@@ -21,7 +19,6 @@ function CreateClientModal({ isModalOpen, toggleModal, handleAddClient }) {
         onFinish={(values) => handleAddClient(values)}
       >
         <Flex vertical>
-          {/*  */}
           <Form.Item
             label="Username"
             name="user_name"
@@ -61,7 +58,7 @@ function CreateClientModal({ isModalOpen, toggleModal, handleAddClient }) {
               },
             ]}
           >
-            <Input />
+            <InputNumber />
           </Form.Item>
         </Flex>
 

@@ -8,6 +8,9 @@ import Paragraph from "antd/es/typography/Paragraph";
 
 function GetBalancePage(props) {
   const { clients } = props;
+
+  // notification api from antd: https://ant.design/components/notification
+  // contextHolder is used in the return statement.
   const [api, contextHolder] = notification.useNotification();
 
   const [account, setAccount] = useState();
@@ -16,9 +19,12 @@ function GetBalancePage(props) {
   const toggleModal = () => setIsModalOpen((previous) => !previous);
 
   const getBalance = (values) => {
-    // deconstruct username from values of the GetBalanceForm
+    // deconstruct the values of the GetBalanceForm
     const { username } = values;
-    const account = clients.find((client) => client.user_name === username);
+
+    const account = clients.find((client) => {
+      return client.user_name === username;
+    });
 
     // if no account matches, display error notification then return.
     if (!account) {
@@ -56,7 +62,7 @@ function GetBalancePage(props) {
         footer={null}
       >
         <Paragraph>
-          {/* if account has value, display the user_name & email */}
+          {/* if account has value, display the user_name & email. -- is not part of the syntax and just a separator */}
           {account?.user_name} -- ({account?.email})
         </Paragraph>
         <Title>${account?.balance}</Title>

@@ -5,26 +5,26 @@ import { Button, Table } from "antd";
 import CreateClientModal from "./CreateClientModal/CreateClientModal.component";
 
 function ClientPage(props) {
-  //destructure
+  // Destructure of the props
   const { clients, onDelete, onAdd } = props;
 
-  //close
+  // Modal state, defaults to false
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // negating the previous value
+  // Negating the previous value
   const toggleModal = () => setIsModalOpen((previous) => !previous);
 
   const handleAddClient = (record) => {
-    // copy the record from the form, then add the id.
-    const newRecord = { ...record, id: clients.length + 1 };
+    // Copy the record from the form, then add the id.
+    const newClient = { ...record, id: clients.length + 1 };
 
-    // pass in the newRecord to the onAdd props.
-    onAdd(newRecord);
+    // Pass in the newRecord to the onAdd props.
+    onAdd(newClient);
   };
 
-  const handleDelete = (record) => {
-    console.log("Record: ", record);
-    onDelete(record.id);
+  // record is used to be able to access record.id
+  const handleDelete = (clientId) => {
+    onDelete(clientId);
   };
 
   const columns = [
@@ -48,7 +48,7 @@ function ClientPage(props) {
       dataIndex: "delete",
       key: "delete",
       render: (_, record) => (
-        <Button onClick={() => handleDelete(record)}>Delete</Button>
+        <Button onClick={() => handleDelete(record.id)}>Delete</Button>
       ),
     },
   ];

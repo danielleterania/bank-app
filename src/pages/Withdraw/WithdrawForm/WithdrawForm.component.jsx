@@ -1,4 +1,4 @@
-import { Button, Flex, Form, Input } from "antd";
+import { Button, Flex, Form, Input, InputNumber } from "antd";
 import React from "react";
 
 function WithdrawForm(props) {
@@ -43,11 +43,11 @@ function WithdrawForm(props) {
           rules={[
             {
               required: true,
-              message: "Please input your amount to trasfer!",
+              message: "Please input your amount to withdraw!",
             },
           ]}
         >
-          <Input />
+          <InputNumber />
         </Form.Item>
       </Flex>
 

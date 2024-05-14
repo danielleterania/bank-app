@@ -43,7 +43,7 @@ function DepositForm(props) {
           rules={[
             {
               required: true,
-              message: "Please input your amount to trasfer!",
+              message: "Please input your amount to deposit!",
             },
           ]}
         >
