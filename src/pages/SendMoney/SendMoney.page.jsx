@@ -5,12 +5,13 @@ import SendMoneyForm from "./SendMoneyForm/SendMoneyForm.component";
 import { notification } from "antd";
 
 function SendMoneyPage(props) {
-  const { clients } = props;
+  const { clients, setClients } = props;
 
   const [api, contextHolder] = notification.useNotification();
 
   const getAccount = (values) => {
     const { sender, receiver, transferAmount } = values;
+    const amount = parseFloat(transferAmount); // Convert to a number
 
     const senderAccount = clients.find((client) => client.user_name === sender);
     const receiverAccount = clients.find((client) => client.user_name === receiver);
@@ -19,19 +20,30 @@ function SendMoneyPage(props) {
       openNotificationWithIcon("error", "One or both users do not exist!");
       return;
     }
-    
-    if (transferAmount <= 0) {
+
+    if (amount <= 0) {
       openNotificationWithIcon("error", "Invalid transfer amount!");
       return;
     }
 
-    if (senderAccount.balance < transferAmount) {
+    if (senderAccount.balance < amount) {
       openNotificationWithIcon("error", "Sender does not have enough balance!");
       return;
     }
 
     // Perform the money transfer operation here
-    
+    const updatedClients = clients.map((client) => {
+      if (client.user_name === sender) {
+        return { ...client, balance: client.balance - amount };
+      }
+      if (client.user_name === receiver) {
+        return { ...client, balance: client.balance + amount };
+      }
+      return client;
+    });
+
+    setClients(updatedClients);
+
     openNotificationWithIcon("success", "Money transferred successfully!");
   };
 

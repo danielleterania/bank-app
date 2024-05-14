@@ -125,8 +125,7 @@ function App() {
           />
           <Route
             path="/send-money"
-            ndex
-            element={<SendMoneyPage clients={clients} />}
+            element={<SendMoneyPage clients={clients} setClients={setClients} />}
           />
           <Route
             path="/get-balance"
