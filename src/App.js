@@ -131,14 +131,10 @@ function App() {
           <Route
             path="/withdraw"
             element={
-<<<<<<< Updated upstream
               <WithdrawPage
                 clients={clients}
                 onWithdraw={(user) => handleWithdraw(user)}
               />
-=======
-              <WithdrawPage clients={clients} onWithdraw={handleWithdraw} />
->>>>>>> Stashed changes
             }
           />
           <Route
