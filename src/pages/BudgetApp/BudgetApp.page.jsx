@@ -2,36 +2,39 @@ import React, { useState } from "react";
 import { Button, Dropdown, Menu, Modal, Table, Form, Input } from "antd";
 
 function BudgetAppPage({ clients, onAddExpense }) {
-  const [selectedClient, setSelectedClient] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [expenses, setExpenses] = useState([]);
-  const [expenseName, setExpenseName] = useState("");
-  const [expenseAmount, setExpenseAmount] = useState("");
+  const [selectedClient, setSelectedClient] = useState(null); //Tracks the currently selected client
+  const [isModalOpen, setIsModalOpen] = useState(false); //Controls the visibility of the modal used to add new expenses
+  const [expenses, setExpenses] = useState([]); //Stores the list of expenses for the selected client
+  const [expenseName, setExpenseName] = useState(""); //Track the input values for new expenses
+  const [expenseAmount, setExpenseAmount] = useState(""); //Track the input values for new expenses.
 
+  // function in selecting the client from the dropdown
   const handleClientSelect = (client) => {
     setSelectedClient(client);
     setExpenses([]);
   };
 
+  //function to add an expense and amount from the name of the client currently selected
   const handleAddExpense = () => {
     const newExpense = {
       client: selectedClient.user_name,
       name: expenseName,
       amount: expenseAmount,
     };
-    setExpenses([...expenses, newExpense]);
-    onAddExpense(newExpense);
+    setExpenses([...expenses, newExpense]); //This updates the expenses state by adding the new expense to the existing list of expenses 
+    onAddExpense(newExpense); // notify the parent component about the addition of a new expense.
     setExpenseName("");
     setExpenseAmount("");
-    setIsModalOpen(false);
+    setIsModalOpen(false); //for adding new expense and will close after adding an expense
   };
 
   const handleDeleteExpense = (index) => {
-    const updatedExpenses = [...expenses];
+    const updatedExpenses = [...expenses]; //removes the element from the updatedExpenses array
     updatedExpenses.splice(index, 1);
     setExpenses(updatedExpenses);
   };
 
+  //TABLE COMPONENT
   const columns = [
     {
       title: "Expense Name",
