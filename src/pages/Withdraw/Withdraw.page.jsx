@@ -13,7 +13,7 @@ function WithdrawPage(props) {
 
   const getAccount = (values) => {
     // deconstruct the values from the DepositForm
-    const { username, email } = values;
+    const { username, email, amount } = values;
 
     // .find checks if the inputted username and email is in the clients list
     const account = clients.find((client) => {
@@ -22,31 +22,25 @@ function WithdrawPage(props) {
 
     // if no account matches, display error notification then return.
     if (!account) {
-      openNotificationWithIcon("error");
+      openNotificationWithIcon("error", "User not Found!");
+      return;
+    }
+
+    if (amount > account.balance) {
+      openNotificationWithIcon("error", "Insufficient Balance!");
       return;
     }
 
     onWithdraw(values);
 
     // if an account is found, display success notification.
-    openNotificationWithIcon("success");
+    openNotificationWithIcon("success", "Withdrawal Successful!");
   };
 
-  const openNotificationWithIcon = (type) => {
-    const message = {
-      error: {
-        title: "Error!",
-        description: "User does not exist",
-      },
-      success: {
-        title: "Success!",
-        description: "Withdrawal complete!",
-      },
-    };
-
+  const openNotificationWithIcon = (type, message) => {
     api[type]({
-      message: message[type].title,
-      description: message[type].description,
+      message: type,
+      description: message,
     });
   };
 

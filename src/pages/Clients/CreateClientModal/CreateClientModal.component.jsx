@@ -54,7 +54,7 @@ function CreateClientModal(props) {
             rules={[
               {
                 required: true,
-                message: "Please input your password!",
+                message: "Please input a number!",
               },
             ]}
           >

@@ -4,6 +4,13 @@ import React from "react";
 function DepositForm(props) {
   const { onSubmit } = props;
 
+  // Function to handle key down event
+  const handleKeyDown = (event) => {
+    if (event.key === "e") {
+      event.preventDefault(); // Prevent typing "e" into the input box
+    }
+  };
+
   return (
     <Form
       name="basic"
@@ -45,11 +52,14 @@ function DepositForm(props) {
           rules={[
             {
               required: true,
-              message: "Please input your amount to deposit!",
+              type: "number",
+              min: 0,
+              message: "Please input a positive amount!",
             },
           ]}
         >
-          <InputNumber />
+          {/* Add onKeyDown event handler to prevent typing "e" */}
+          <InputNumber onKeyDown={handleKeyDown} />
         </Form.Item>
       </Flex>
 

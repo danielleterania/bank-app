@@ -4,10 +4,19 @@ import React from "react";
 function WithdrawForm(props) {
   const { onSubmit } = props;
 
-  const handleOnSubmit = (values) => onSubmit(values);
+  // Function to handle key down event
+  const handleKeyDown = (event) => {
+    if (event.key === "e") {
+      event.preventDefault(); // Prevent typing "e" into the input box
+    }
+  };
 
   return (
-    <Form name="basic" layout="vertical" onFinish={handleOnSubmit}>
+    <Form
+      name="basic"
+      layout="vertical"
+      onFinish={(values) => onSubmit(values)}
+    >
       <Flex vertical>
         <Form.Item
           label="Username"
@@ -43,11 +52,12 @@ function WithdrawForm(props) {
           rules={[
             {
               required: true,
-              message: "Please input your amount to withdraw!",
+              message: "Please input your withdrawal amount!",
             },
           ]}
         >
-          <InputNumber />
+          {/* Add onKeyDown event handler to prevent typing "e" */}
+          <InputNumber onKeyDown={handleKeyDown} />
         </Form.Item>
       </Flex>
 

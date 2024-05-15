@@ -10,6 +10,7 @@ import { Layout, notification } from "antd";
 import Sidebar from "./layout/Sidebar/Sidebar.component";
 import GetBalancePage from "./pages/GetBalance/GetBalance.page";
 import BudgetAppPage from "./pages/BudgetApp/BudgetApp.page";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   const [clients, setClients] = useState(data);
@@ -97,7 +98,9 @@ function App() {
 
   const handleAddExpense = (expense) => {
     const updatedClients = [...clients];
-    const userIndex = updatedClients.findIndex((client) => client.user_name === expense.client);
+    const userIndex = updatedClients.findIndex(
+      (client) => client.user_name === expense.client
+    );
     updatedClients[userIndex].balance -= parseFloat(expense.amount);
     setClients(updatedClients);
   };
@@ -135,7 +138,9 @@ function App() {
           />
           <Route
             path="/send-money"
-            element={<SendMoneyPage clients={clients} setClients={setClients} />}
+            element={
+              <SendMoneyPage clients={clients} setClients={setClients} />
+            }
           />
           <Route
             path="/get-balance"
@@ -143,8 +148,14 @@ function App() {
           />
           <Route
             path="/budget-app"
-            element={<BudgetAppPage clients={clients} onAddExpense={handleAddExpense} />}
+            element={
+              <BudgetAppPage
+                clients={clients}
+                onAddExpense={handleAddExpense}
+              />
+            }
           />
+          <Route path="*" element={<NotFound></NotFound>}></Route>
         </Routes>
       </BrowserRouter>
     </Layout>
