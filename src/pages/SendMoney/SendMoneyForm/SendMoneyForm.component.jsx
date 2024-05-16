@@ -1,4 +1,4 @@
-import { Button, Flex, Form, Input } from "antd";
+import { Button, Flex, Form, Input, InputNumber} from "antd";
 import React from "react";
 
 function SendMoneyForm(props) {
@@ -47,7 +47,7 @@ function SendMoneyForm(props) {
             },
           ]}
         >
-          <Input />
+          <InputNumber min={0} style={{ width: '100%' }} />
         </Form.Item>
       </Flex>
 

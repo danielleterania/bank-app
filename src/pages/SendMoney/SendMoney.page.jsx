@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import PageWrapper from "../../layout/PageWrapper/PageWrapper.component";
 import PageHeader from "../../layout/PageHeader/PageHeader.component";
 import SendMoneyForm from "./SendMoneyForm/SendMoneyForm.component";
-import { notification } from "antd";
+import { notification, Table } from "antd";
 
 function SendMoneyPage(props) {
   const { clients, setClients } = props;
 
   const [api, contextHolder] = notification.useNotification();
+  const [transactionHistory, setTransactionHistory] = useState([]);
 
   const getAccount = (values) => {
     const { sender, receiver, transferAmount } = values;
@@ -44,6 +45,16 @@ function SendMoneyPage(props) {
 
     setClients(updatedClients);
 
+    // Add the transaction to the history
+    const transaction = {
+      date: new Date().toLocaleString(),
+      sender: sender,
+      receiver: receiver,
+      amount: amount,
+    };
+
+    setTransactionHistory([...transactionHistory, transaction]);
+
     openNotificationWithIcon("success", "Money transferred successfully!");
   };
 
@@ -59,6 +70,29 @@ function SendMoneyPage(props) {
     });
   };
 
+  const columns = [
+    {
+      title: "Transaction Date and Time",
+      dataIndex: "date",
+      key: "date",
+    },
+    {
+      title: "Sender Name",
+      dataIndex: "sender",
+      key: "sender",
+    },
+    {
+      title: "Receiver Name",
+      dataIndex: "receiver",
+      key: "receiver",
+    },
+    {
+      title: "Transfer Amount",
+      dataIndex: "amount",
+      key: "amount",
+    },
+  ];
+
   return (
     <PageWrapper>
       {contextHolder}
@@ -67,6 +101,12 @@ function SendMoneyPage(props) {
         subtitle="Send money to another account using user names."
       />
       <SendMoneyForm onSubmit={getAccount} />
+
+      <div style={{ marginTop: "20px" }}>
+        <h3>Transaction History</h3>
+        <Table dataSource={transactionHistory} columns={columns} />
+      </div>
+      
     </PageWrapper>
   );
 }
